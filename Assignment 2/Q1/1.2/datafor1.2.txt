@@ -1,0 +1,23 @@
+run 1:
+Time spent for process 1: 3739.147265 SCHED_OTHER p:0
+Time spent for process 2: 2938.981185 SCHED_RR p:1
+Time spent for process 3: 2938.746708 SCHED_FIFO p:2
+
+run 2 :
+Time spent for process 1: 3919.690277 SCHED_OTHER p:0
+Time spent for process 2: 3035.698273 SCHED_RR p:20
+Time spent for process 3: 3037.703615 SCHED_FIFO p:40
+
+run 3 :
+Time spent for process 1: 3838.981185 SCHED_OTHER p:0
+Time spent for process 2: 2978.746708 SCHED_RR p:80
+Time spent for process 3: 2992.273632 SCHED_FIFO p:40
+
+run 4 :
+Time spent for process 1: 3302.763921 SCHED_OTHER p:0
+Time spent for process 2: 2684.928363 SCHED_RR p:60
+Time spent for process 3: 2572.263523 SCHED_FIFO p:90
+
+
+
+

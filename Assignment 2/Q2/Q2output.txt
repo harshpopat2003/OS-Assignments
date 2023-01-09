@@ -1,0 +1,70 @@
+Output for Q2 :
+Matrix 1 is : 
+21 65 12 71 
+83 10 91 33 
+51 47 99 55 
+71 19 80 67 
+
+Matrix 2 before copy is : 
+69 69 69 69 
+69 69 69 69 
+69 69 69 69 
+69 69 69 69 
+
+Matrix 2 after copy is:
+21 65 12 71 
+83 10 91 33 
+51 47 99 55 
+71 19 80 67 
+
+diff file change:
+Only in linux-5.19.8/arch/x86/entry: syscall_64.o
+diff -u -r orig_linux/linux-5.19.8/arch/x86/entry/syscalls/syscall_64.tbl linux-5.19.8/arch/x86/entry/syscalls/syscall_64.tbl
+--- orig_linux/linux-5.19.8/arch/x86/entry/syscalls/syscall_64.tbl	2022-09-08 14:54:08.000000000 +0530
++++ linux-5.19.8/arch/x86/entry/syscalls/syscall_64.tbl	2022-11-19 12:00:13.709959339 +0530
+@@ -372,6 +372,7 @@
+ 448	common	process_mrelease	sys_process_mrelease
+ 449	common	futex_waitv		sys_futex_waitv
+ 450	common	set_mempolicy_home_node	sys_set_mempolicy_home_node
++451     common  kernel_2d_memcpy        sys_kernel_2d_memcpy
+ 
+ #
+ # Due to a historical design error, certain syscalls are numbered differently
+Only in linux-5.19.8/arch/x86/entry: thunk_64.o
+Only in linux-5.19.8/arch/x86/entry/vdso: .built-in.a.cmd
+
+
+
+Only in linux-5.19.8/kernel_2d_memcpy_syscall: .kernel_2d_memcpy_syscall.o.cmd
+Only in linux-5.19.8/kernel_2d_memcpy_syscall: .modules.order.cmd
+diff -u -r orig_linux/linux-5.19.8/kernel_2d_memcpy_syscall/Makefile linux-5.19.8/kernel_2d_memcpy_syscall/Makefile
+--- orig_linux/linux-5.19.8/kernel_2d_memcpy_syscall/Makefile	2022-11-21 21:32:59.889996625 +0530
++++ linux-5.19.8/kernel_2d_memcpy_syscall/Makefile	2022-11-19 08:28:04.469972685 +0530
+@@ -1 +1 @@
+-
++obj-y := kernel_2d_memcpy_syscall.o
+Only in linux-5.19.8/kernel_2d_memcpy_syscall: built-in.a
+diff -u -r orig_linux/linux-5.19.8/kernel_2d_memcpy_syscall/kernel_2d_memcpy_syscall.c linux-5.19.8/kernel_2d_memcpy_syscall/kernel_2d_memcpy_syscall.c
+--- orig_linux/linux-5.19.8/kernel_2d_memcpy_syscall/kernel_2d_memcpy_syscall.c	2022-11-21 21:31:49.479996698 +0530
++++ linux-5.19.8/kernel_2d_memcpy_syscall/kernel_2d_memcpy_syscall.c	2022-11-21 00:16:19.119999272 +0530
+@@ -2,3 +2,20 @@
+ #include <linux/syscalls.h>
+ 
+ 
++SYSCALL_DEFINE4(kernel_2d_memcpy, float *, dst, float * , src, int, rows, int, cols)
++{
++float kMatrix[rows][cols];
++if(__copy_from_user(kMatrix, src, sizeof(kMatrix)))
++{
++    printk(KERN_INFO "Error copying from user space!\n");
++    return -1;
++}
++if (__copy_to_user(dst, kMatrix, sizeof(kMatrix)))
++{
++    printk(KERN_INFO "Error copying to user space!\n");
++    return -1;
++}
++printk(KERN_INFO "Successfully Copied The Matrix\n");
++return 0;
++}
++

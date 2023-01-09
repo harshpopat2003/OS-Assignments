@@ -1,0 +1,69 @@
+thread A is SCHED_OTHER
+thread B is SCHED_RR
+thread C is SCHED_FIFO
+
+run 1:
+Starting Thread A p:0
+Starting Thread C p:3
+Starting Thread B p:2
+Time taken to execute countC: 19.883530
+Time taken to execute countA: 22.846608
+Time taken to execute countB: 19.978158
+
+run 2:
+Starting Thread A p:0
+Starting Thread B p:20
+Starting Thread C p:40
+Time taken to execute countC: 17.559481 
+Time taken to execute countB: 17.866525
+Time taken to execute countA: 20.887544
+
+run 3:
+Starting Thread A p:0
+Starting Thread B p:40
+Starting Thread C p:20
+Time taken to execute countC: 18.236002
+Time taken to execute countB: 18.304767
+Time taken to execute countA: 20.347938
+
+run 4:
+Starting Thread A p:0
+Starting Thread B p:69
+Starting Thread C p:40
+Time taken to execute countC: 7.777628
+Time taken to execute countB: 7.938449
+Time taken to execute countA: 9.492472
+
+run 5:
+Starting Thread A p:0
+Starting Thread B p:40
+Starting Thread C p:99
+Time taken to execute countC: 7.777628
+Time taken to execute countB: 7.938449
+Time taken to execute countA: 9.284586
+
+run 6:
+Starting Thread A p:0
+Starting Thread B p:10
+Starting Thread C p:90
+Time taken to execute countB: 12.576031
+Time taken to execute countC: 12.928732
+Time taken to execute countA: 14.484983
+
+run 7: 
+Starting Thread A p:0
+Starting Thread B p:99
+Starting Thread C p:10
+Time taken to execute countC: 8.069555
+Time taken to execute countA: 8.292472
+Time taken to execute countB: 8.083599
+
+run 8:
+Starting Thread A p:0
+Starting Thread B p:99
+Starting Thread C p:99
+Time taken to execute countC: 12.928732
+Time taken to execute countA: 13.484983
+Time taken to execute countB: 12.576031
+
+
